@@ -192,7 +192,7 @@
 }
 </style>
 </head>
-<link rel="stylesheet" href="/themes/clientarea/ogmiao/assets/css/clientarea.css">
+<link rel="stylesheet" href="https://cloud.ogmiao.com/themes/clientarea/ogmiao/assets/css/clientarea.css">
     
     <script src="/themes/clientarea/default/assets/libs/echarts/echarts.min.js?v={$Ver}"></script>
     <script>
@@ -1608,21 +1608,17 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
   
   // 强制重排序函数
   function forceReorder() {
-    console.log('开始内容排序');
     
     // 获取主容器
     const mainRow = document.querySelector('.row');
     if (!mainRow) {
-      console.error('未找到主容器 .row');
       return;
     }
     
     // 获取所有section元素
     const allSections = Array.from(mainRow.querySelectorAll('section'));
-    console.log('找到section元素数量:', allSections.length);
     
     if (allSections.length < 6) {
-      console.warn('section元素数量不足，无法完成排序');
       return;
     }
     
@@ -1634,15 +1630,12 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
       const section = findSectionByContent(allSections, item.selector);
       if (section) {
         sectionMap[item.name] = section;
-        console.log(`找到${item.name}部分`);
       } else {
-        console.warn(`未找到${item.name}部分`);
       }
     });
     
     // 如果没有找到所有section，尝试通过位置识别
     if (Object.keys(sectionMap).length < 6) {
-      console.log('通过内容特征未找到所有section，尝试通过位置识别');
       
       // 基于当前顺序的映射关系
       const positionMap = {
@@ -1658,7 +1651,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
       mobileDesiredOrder.forEach(item => {
         if (!sectionMap[item.name] && positionMap[item.name] !== undefined && allSections[positionMap[item.name]]) {
           sectionMap[item.name] = allSections[positionMap[item.name]];
-          console.log(`通过位置找到${item.name}部分`);
         }
       });
     }
@@ -1666,7 +1658,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
     // 检查是否找到了所有section
     const missingItems = mobileDesiredOrder.filter(item => !sectionMap[item.name]);
     if (missingItems.length > 0) {
-      console.warn('仍有部分section未找到:', missingItems.map(i => i.name).join(', '));
       return;
     }
     
@@ -1692,7 +1683,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
     
     if (isMobile) {
       // 移动端：单列布局，按照mobileDesiredOrder排序
-      console.log('应用移动端单列布局');
       
       mobileDesiredOrder.forEach(item => {
         const section = sectionMap[item.name];
@@ -1710,7 +1700,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
       });
     } else {
       // PC端：双列布局
-      console.log('应用PC端双列布局');
       
       // 创建左列容器
       const leftColumn = document.createElement('section');
@@ -1745,8 +1734,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
       mainRow.appendChild(rightColumn);
     }
     
-    console.log('内容排序完成');
-    
     // 添加标记，防止重复执行
     mainRow.setAttribute('data-reordered', 'true');
     
@@ -1769,7 +1756,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
       try {
         forceReorder();
       } catch (error) {
-        console.error('排序过程中发生错误:', error);
         // 出错时应用备用方法
         applyFallbackMethod();
       }
@@ -1837,7 +1823,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
   
   // 备用方法
   function applyFallbackMethod() {
-    console.log('应用备用方法');
     
     const mainRow = document.querySelector('.row');
     if (!mainRow) return;
@@ -1996,7 +1981,6 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
     const observer = new MutationObserver((mutations) => {
       const mainRow = document.querySelector('.row');
       if (mainRow && !mainRow.getAttribute('data-reordered')) {
-        console.log('检测到DOM变化，尝试排序');
         optimizedReorder();
       }
     });
@@ -2147,4 +2131,3 @@ weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s ease; 
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3) !important;
 }
 </style>
-

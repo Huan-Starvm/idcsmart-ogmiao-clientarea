@@ -731,6 +731,51 @@ body .vertical-menu[style*="#6064ff"],
   .top-nav-icon {
     font-size: 18px;
   }
+
+  /* 确保用户中心菜单项在移动端不会错误地显示为激活状态 */
+  #sidebar-menu ul li a[href*="details"],
+  #sidebar-menu ul li a[href*="security"],
+  #sidebar-menu ul li a[href*="message"],
+  #sidebar-menu ul li a[href*="verified"] {
+    color: var(--menu-text) !important;
+  }
+
+  /* 只有当真正激活时才应用激活样式 */
+  #sidebar-menu ul li.mm-active > a[href*="details"],
+  #sidebar-menu ul li.mm-active > a[href*="security"],
+  #sidebar-menu ul li.mm-active > a[href*="message"],
+  #sidebar-menu ul li.mm-active > a[href*="verified"] {
+    color: var(--menu-active-text) !important;
+    background-color: var(--menu-active) !important;
+  }
+
+  /* 确保顶部用户下拉菜单在移动端正常工作 */
+  .dropdown-menu.dropdown-menu-right {
+    position: absolute !important;
+    transform: none !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    will-change: transform !important;
+    border-radius: 15px !important;
+    margin-top: 10px !important;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000 !important;
+  }
+
+  /* 确保下拉菜单显示在其他元素之上 */
+  .dropdown-menu.show {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 1050 !important;
+  }
+
+  /* 修复用户头像下拉菜单按钮在移动端的样式 */
+  .top-nav-user-btn {
+    z-index: 100 !important;
+    position: relative !important;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -776,3 +821,12 @@ body .vertical-menu[style*="#6064ff"],
   }
 }
 
+/* 确保下拉菜单箭头正确显示 */
+.user-dropdown-icon {
+  transition: transform 0.3s ease !important;
+  display: inline-block !important;
+}
+
+.show .user-dropdown-icon {
+  transform: rotate(180deg) !important;
+}
