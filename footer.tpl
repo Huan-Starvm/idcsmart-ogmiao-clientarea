@@ -11,7 +11,6 @@
 			    <a href="#" id="hitokoto_text">获取一言中...</a><br>
 			    {/if}
 				&copy; {$Setting.company_name}.
-				{/if}
 			</div>
 			<div class="col-sm-6">
 				<div class="text-sm-right d-none d-sm-block">
