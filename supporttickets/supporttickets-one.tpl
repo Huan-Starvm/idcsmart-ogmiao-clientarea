@@ -16,7 +16,7 @@
 
 			<p>{$Lang.ticket_top_five}</p>
 
-			<p>{$Lang.ticket_top_six}:</p>
+			<p>{$Lang.ticket_top_six}</p>
 
 			<p>{$Lang.ticket_top_seven}</p>
 
